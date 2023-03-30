@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+  <script src="curdOpera.js" defer></script>
+  <title>Form with Local Storage</title>
+  <style>
+    .newItem {
+      list-style-type: none
+    }
+
+    .btn {
+      float: right;
+      margin: auto;
+      display: flex;
+    }
+
+    .edit {
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="myForm" class="w3-container w3-card-4">
+    <label for="name" class="w3-text-blue">Name:</label>
+    <input class="w3-input w3-border" type="text" id="name" name="name" required>
+    <br>
+    <label for="mobile" class="w3-text-blue">Mobile No:</label>
+    <input class="w3-input w3-border" type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+    <br>
+    <label for="email" class="w3-text-blue">Email:</label>
+    <input class="w3-input w3-border" type="email" id="email" name="email" required>
+    <br>
+    <button class=" w3-btn w3-blue" type="submit">Submit</button>
+  </form>
+
+  <ul class="w3-ul w3-hoverable" id="list">
+
+  </ul>
+
+</body>
+
+</html>
