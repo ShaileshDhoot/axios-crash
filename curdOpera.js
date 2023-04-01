@@ -12,10 +12,6 @@ form.addEventListener('submit', (e) => {
         mobile,
         email
     }
-    // localStorage.setItem(personData.email, JSON.stringify(personData))
-    // const displayPersonData = JSON.parse(localStorage.getItem(personData.email))
-    // console.log(displayPersonData);
-
     const newLi = document.createElement('li')
     newLi.className = "newItem "
     newLi.textContent = `${name}     ${mobile}     ${email}`
@@ -38,78 +34,67 @@ form.addEventListener('submit', (e) => {
     document.querySelector("#mobile").value = ""
     document.querySelector('#email').value = ""
 
-    // newLi.addEventListener('click', (e) => {
-    //     if (e.target.classList.contains('delete')) {
-    //         axios.delete(`'https://crudcrud.com/api/c2bf44aa787142ca906a26200f4bb12b/Register/${_id}'`)
-    //             .then(response => showOutput(res))
-    //             .catch(err => console.error(err))
-    //     }
-        // if (e.target.classList.contains('edit')) {
-        //     document.querySelector("#name").value = name
-        //     document.querySelector("#mobile").value = mobile
-        //     document.querySelector('#email').value = email
-        //     e.target.parentNode.remove()
-        //     localStorage.removeItem(personData.email)
-        // }
-    //})
+    newLi.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete')) {
+            axios.delete(`https://crudcrud.com/api/c2bf44aa787142ca906a26200f4bb12b/Register/${_id}`)
+                .then(response => showOutput(res))
+                .catch(err => console.error(err))
+        }
+        if (e.target.classList.contains('edit')) {
+            document.querySelector("#name").value = name
+            document.querySelector("#mobile").value = mobile
+            document.querySelector('#email').value = email
+            e.target.parentNode.remove()
+            localStorage.removeItem(personData.email)
+            const config = {
+                method: "PUT",
+                url: `https://crudcrud.com/api/c2bf44aa787142ca906a26200f4bb12b/Register/${_id}`,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    Name: name,
+                    MobileNo: mobile,
+                    Email: email
+                }
+            }
+            axios(config)
+                .then((res) => {
+                    console.log(res.data)
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+    })
 
-    // newLi.addEventListener('click', (e) => {
-    //     if (e.target.classList.contains('delete')) {
-    //         e.target.parentNode.remove()
-    //         localStorage.removeItem(personData.email)
-    //     }
+    const config = {
+        method: "POST",
+        url: 'https://crudcrud.com/api/7f8066b1bb5d442e8b18ac498e34b275/Register',
 
-    //     if (e.target.classList.contains('edit')) {
-    //         document.querySelector("#name").value = name
-    //         document.querySelector("#mobile").value = mobile
-    //         document.querySelector('#email').value = email
-    //         e.target.parentNode.remove()
-    //         localStorage.removeItem(personData.email)
-    //     }
-    // })
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            Name: name,
+            MobileNo: mobile,
+            Email: email
+        }
+    }
 
-    // const config = {
-    //     method: "POST",
-    //     url: 'https://crudcrud.com/api/c2bf44aa787142ca906a26200f4bb12b/Register',
-
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     data: {
-    //         Name: name,
-    //         MobileNo: mobile,
-    //         Email: email
-    //     }
-    // }
-
-    // axios(config)
-    //     .then((res) => {
-    //         console.log(res.data)
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     })
-
-    //-----------display data in browser
-
-    // const res = axios('https://crudcrud.com/api/c2bf44aa787142ca906a26200f4bb12b/Register')
-    //     .then((res) => {
-    //         console.log(res.data)
-    //         let output = JSON.stringify(res.data) 
-    //         document.getElementById('display').innerText = output
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     })
-
-    //--------using loop 
-
+    axios(config)
+        .then((res) => {
+            console.log(res.data)
+        })
+        .catch((error) => {
+            console.log(error);
+        })
 
 })
 window.addEventListener("DOMContentLoaded", (e) => {
     e.preventDefault()
 
-    axios('https://crudcrud.com/api/c2bf44aa787142ca906a26200f4bb12b/Register')
+    axios('https://crudcrud.com/api/7f8066b1bb5d442e8b18ac498e34b275/Register')
         .then((response) => {
             console.log(response);
             console.log(response.data)
@@ -130,12 +115,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
                 newUl.appendChild(newLi)
                 newLi.appendChild(del)
                 newLi.appendChild(edit)
-            };        
+            };
         }).catch((error) => {
             console.log(error);
-    })     
+        })
 })
-
-
-
-
